@@ -1,0 +1,100 @@
+<div *ngIf="item">
+  <ion-card color="white" class="item_details">
+    <ion-grid class="details_grid">
+      <ion-row class="details_header">
+
+        <ion-col col-1 class="details_id">
+          <div class="id_container">{{ item.id }}</div></ion-col>
+
+        <ion-col col-10 col-lg-9 class="details_title">
+          <ion-row>
+
+              <ion-item style="height: 4em;">
+                <ion-input  [(ngModel)]="item.name"></ion-input>
+              </ion-item>
+
+          </ion-row>
+
+          <ion-row style="width: 100%; height: 100%;">
+            <ion-list style="width: 100%; height: 100%;">
+              <ion-row style="width: 100%; height: 100%;">
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>M</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>Tu</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>W</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>Th</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>F</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>Sa</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col class="full_col">
+                  <ion-item>
+                    <ion-label>Su</ion-label>
+                    <ion-checkbox class="details_check"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </ion-row>
+
+
+        </ion-col>
+        <ion-col col-1 col-md-2 col-lg-1 col-xl-2  class="details_type">
+
+
+          <ion-item>
+            <ion-label> Activity Type</ion-label>
+            <ion-select [(ngModel)]="item.type">
+              <ion-option value="Business">Business</ion-option>
+              <ion-option value="Health">Health</ion-option>
+              <ion-option value="Education">Education</ion-option>
+              <ion-option value="Personal">Personal</ion-option>
+              <ion-option value="Logistics">Logistics</ion-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="details_content">
+        <ion-col col-8>
+          <ion-textarea [(ngModel)]="item.notes"></ion-textarea>
+        </ion-col>
+        <ion-col col-4>
+          Streak:
+          Total Hours:
+          Times Completed:
+          Times Missed:
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</div>

@@ -1,0 +1,601 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-row>
+      <ion-col col-2>
+        <ion-buttons start>
+          <button ion-button large icon-left (click)="prevDay()">
+
+            <ion-icon name="arrow-dropleft"></ion-icon>
+            Prev
+          </button>
+
+        </ion-buttons>
+
+      </ion-col>
+
+      <ion-col col-8></ion-col>
+
+
+      <ion-col col-2>
+        <ion-buttons end>
+          <button ion-button large icon-only (click)="nextDay()">
+            Next
+            <ion-icon name="arrow-dropright"></ion-icon>
+          </button>
+
+        </ion-buttons>
+
+      </ion-col>
+
+
+
+    </ion-row>
+
+    <ion-row>
+      <ion-title>
+        {{ view }}'s <span *ngIf="view == 'Today'"> ({{ today }}'s)</span> Schedule
+      </ion-title>
+
+    </ion-row>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="schedule_button_container">
+          <ion-row>
+            <ion-col class="col-4" class="add_container">
+
+              <button ion-button full icon-only color="secondary" style="border-radius: 15px;" (click)="openItemModal()">
+                <ion-icon name="add-circle"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col class="col-4"></ion-col>
+            <ion-col class="col-4" class="delete_container">
+
+
+              <button ion-button full icon-only color="danger" style="border-radius: 15px;" >
+                <ion-icon name="close-circle"></ion-icon>
+              </button>
+
+            </ion-col>
+          </ion-row>
+
+        </div>
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+
+
+
+
+
+      <ion-slide>
+        <ion-row>
+          <!--<div *ngFor="let item of ITEMS" style="margin-top: 5px;">-->
+            <!--{{ item.name }}-->
+          <!--</div>-->
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Monday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Monday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-sm-2 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-sm-4 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-sm-4 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="margin: 0px; padding: 0px;" ></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Tuesday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary">
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3  (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Tuesday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 >
+                      <ion-icon name="rose" item-right style="padding-left: 5em" (click)="deleteItem(item)"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Wednesday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 >
+                      <ion-icon name="rose" item-right style="padding-left: 5em" (click)="deleteItem(item)"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Wednesday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 >
+                      <ion-icon name="rose" item-right style="padding-left: 5em" (click)="deleteItem(item)"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Thursday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Thursday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3  (click)="deleteItem(item)" >
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Friday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3  (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Friday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary">
+
+                    <ion-col col-3 col-lg-1 col-md-3  (click)="onSelect(item)">
+                      <div>{{item.displayTime}}}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6  (click)="onSelect(item)">
+                      <div>{{item.name}}
+
+                      <!--{{item.displayTime}} | date:'shortTime' }}-->
+
+                      </div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)" >
+                      <ion-icon name="rose" item-right style="padding-left: 5em" ></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Saturday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Saturday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row>
+
+
+          <ion-col col-12>
+            <ion-list-header style="border-width: 0px;">AM</ion-list-header>
+            <ion-list>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Sunday'] == true && item.meridian == 'AM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+
+
+              <ion-list-header style="border-width: 0px;">PM</ion-list-header>
+
+              <div *ngFor="let item of ITEMS | async" style="margin-top: 5px;">
+                <ion-item *ngIf="item.days['Sunday'] == true && item.meridian == 'PM'" class="schedule_item">
+
+                  <ion-row   color="primary" >
+
+                    <ion-col col-3 col-lg-1 col-md-3 (click)="onSelect(item)">
+                      <div>{{item.displayTime}}</div>
+
+                    </ion-col>
+
+                    <ion-col col-8 col-lg-9 col-md-6 (click)="onSelect(item)">
+                      <div>{{item.name}}</div>
+                    </ion-col>
+
+                    <ion-col col-1 col-lg-2 col-md-3 (click)="deleteItem(item)">
+                      <ion-icon name="rose" item-right style="padding-left: 5em"></ion-icon>
+                    </ion-col>
+
+                  </ion-row>
+
+
+
+                </ion-item>
+                <schedule-detail [item]="selectedItem" *ngIf="item == selectedItem"></schedule-detail>
+              </div>
+
+            </ion-list>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-slide>
+    </ion-slides>
+
+  </ion-grid>
+
+
+
+</ion-content>

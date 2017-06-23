@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-col col-xl-8 style="padding-left: 0px; ">
+      <div *ngIf="!selectedSchedule" class="dashboard_pane">
+        <ion-col col-9>
+
+          <div class="clock_unselected"> {{ myDate | amDateFormat: 'h:mm'}}
+          <span *ngIf="city"> {{ city }}</span>
+          </div>
+
+          <div class="title">Loading...</div>
+          <!--<div  *ngIf="selectedSchedule" class="title"> {{selectedSchedule.name}}</div>-->
+        </ion-col>
+        <ion-col col-3>
+         <div>
+
+
+         </div>
+        </ion-col>
+      </div>
+
+      <div *ngIf="selectedSchedule" class="dashboard_pane" [ngClass]="{'business': selectedSchedule.type == 'Business', 'personal': selectedSchedule.type == 'Personal', 'education': selectedSchedule.type == 'Education', 'health': selectedSchedule.type == 'Health', 'social': selectedSchedule.type == 'Social', 'logistics': selectedSchedule.type == 'Logistics'}">
+        <ion-col col-9>
+
+          <div class="clock"> {{ myDate | amDateFormat: 'h:mm'}}</div>
+
+
+          <div  *ngIf="selectedSchedule" class="title"> {{selectedSchedule.name}}</div>
+        </ion-col>
+        <ion-col col-3>
+          <div>
+
+
+          </div>
+        </ion-col>
+      </div>
+
+    </ion-col>
+    <ion-col>
+      <div></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-left: 0px;" *ngFor="let schedule of schedules ">
+
+      <ion-row (click)="onSelect(item)" *ngIf="item.days[this.today] == true"   [ngClass]="{'business': item.type == 'Business', 'personal': item.type == 'Personal', 'education': item.type == 'Education', 'health': item.type == 'Health', 'social': item.type == 'Social', 'logistics': item.type == 'Logistics'}" class="schitem" >
+        <ion-col col-4 col-sm-3 col-lg-2 col-xl-2 style="padding: 0px;">
+          <div class="schitem_time">  {{item.displayTime}} {{item.meridian}}</div>
+
+        </ion-col>
+
+        <ion-col col-8 col-sm-9 col-lg-10 col-xl-10 style="padding: 0px;">
+          <div class="schitem_name">
+            {{ item.name}} {{ item.type }}
+          </div>
+        </ion-col>
+
+      </ion-row>
+
+
+
+
+
+  </ion-row>
+
+</ion-content>
+

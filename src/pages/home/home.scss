@@ -1,0 +1,110 @@
+page-home {
+
+}
+
+ion-icon{
+  padding: 0px;
+}
+.dashboard_pane{
+  background: white;
+  color: black;
+  width: 65vw;
+  border-radius: 3px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
+
+}
+
+.clock{
+  width: 100%;
+  text-align: center;
+  font-size: 15vh;
+  border-bottom: solid white thin
+}
+
+.clock_unselected{
+  width: 100%;
+  text-align: center;
+  font-size: 15vh;
+  border-bottom: solid black thin
+}
+
+.title{
+  width: 100%;
+  text-align: center;
+  font-size: 8vh;
+  padding-top: .2em;
+}
+
+.schitem{
+  font-size: 2vw;
+  margin: 0px 0px 10px 0px;
+  background: #FFFC71;
+  width: 100%;
+  text-align: left;
+  line-height: 2em;
+  border-radius: 3px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.none{
+  background: white;
+  color: black;
+}
+.business{
+  background: #6561f9;
+  color: white;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+.personal{
+  background: #c670ff;
+  color: white;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+.social{
+  background: #fffc71;
+  color: white;
+  border-right: solid black thin !important;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+.health{
+  background: #f93f49;
+  color: white;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+.education{
+  background: #3dd973;
+  color: white;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+.logistics{
+  background: #494949;
+  color: white;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+
+.schitem_time{
+  height: 100%;
+  text-align: right;
+  border-right: solid white thin;
+  line-height: 3em;
+  padding-right: 20px;
+}
+
+.schitem_name{
+  text-align: left;
+  padding-left: 20px;
+  line-height: 3em;
+}

@@ -1,0 +1,74 @@
+page-schedule {
+
+}
+.s_item{
+  font-size: 2vh;
+  height: 3em;
+  width: 100%;
+  border-style: groove;
+  border-width: thin;
+  border-radius: 0;
+  padding: 0;
+  background: lightsteelblue;
+}
+
+.schedule_item{
+  height: 2vh;
+  padding: 0px;
+  padding-left: 7px;
+  line-height: 2em;
+}
+
+
+.schedule_item2{
+  height: 5vh;
+  width: 40vh;
+  border-radius: 2px;
+
+}
+
+.item_time{
+  margin-top: .75em;
+  float: left;
+  margin-left: .5em;
+}
+
+.item_name{
+  margin-top: .75em;
+  float: left;
+  margin-left: .5em;
+}
+
+.item_title{
+  height: 100%;
+}
+.time_container{
+  background: royalblue;
+  border-right: thick solid cornflowerblue ;
+}
+
+.actions_container{
+  background: royalblue;
+  border-left: thick solid cornflowerblue ;
+}
+
+.schedule_button_container{
+  height: 100%;
+  width: 100%;
+  align-content: center;
+  //border: thin solid lightgrey;
+  //border-radius: 3px;
+
+}
+
+.add_container{
+  //border-right: thin solid lightgrey;
+  align-content: center;
+  padding: 0px;
+}
+
+.delete_container{
+  //border-left:  thin solid lightgrey;
+  align-content: center;
+  padding: 0px;
+}
