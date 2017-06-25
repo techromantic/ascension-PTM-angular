@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -30,6 +30,62 @@ import {COSMAngularIndexedDBService} from './utils/cosm-angularindexdb.service'
 import {AscensionIndexedDBService} from './ascension-indexdb.service';
 import { Entity, Item } from './models/item';
 import { Geolocation } from '@ionic-native/geolocation';
+
+@Injectable() export class IndexedDB {
+
+  constructor(public indexedDB: AscensionIndexedDBService, public entity: Entity) { }
+
+  load(): Promise<void> {
+
+    // Opens the "Angular2IndexedDB" database. If it doesn't exist, it will be created.
+    var promise: Promise<any> = new Promise((resolve: any) => {
+
+      this.indexedDB.openDBAsync("AscensionDB", 1).forEach(
+
+        (readyState: string) => {
+
+          console.log('IndexedDB service: opening db: ' + readyState);
+
+        }, null
+
+      ).then(
+
+        () => {
+
+          // Gets all records from "TodoStore".
+          this.indexedDB.getAllRecordsAsync("ItemStore").forEach(
+
+            // Next.
+            (record: Item) => {
+
+              // Adds next record to the Todos entity.
+              if (record != null) {
+
+                this.entity.addItem(record);
+              }
+            }, null
+
+          ).then(() => {
+
+            resolve(true);
+            console.log('IndexedDB service: obtaining of all records completed.');
+
+          });
+
+        });
+
+    });
+
+    return promise;
+
+  }
+
+}
+
+export function initIndexedDB(indexedDB: IndexedDB): Function {
+  return () => indexedDB.load();
+}
+
 
 @NgModule({
   declarations: [
@@ -80,6 +136,13 @@ import { Geolocation } from '@ionic-native/geolocation';
     AscensionIndexedDBService,
     Entity,
     Geolocation,
+    IndexedDB,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initIndexedDB,
+      deps: [IndexedDB],
+      multi: true
+    },
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -27,8 +27,8 @@ export class TimeService {
   }
 
   getTime() :string {
-    this.now = moment().format('HHmmss');
-    console.log('Returning the day:' + this.today);
+    this.now = moment().format('HH:mmss');
+    console.log('Returning the time:' + this.now);
     return this.now;
   }
 

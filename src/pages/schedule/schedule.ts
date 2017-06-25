@@ -233,7 +233,7 @@ export class SchedulePage implements OnInit {
 
               console.log('Updating Item: ' + this.item);
               this.itemService.saveItem(this.item);
-              this.itemService.getItems();//This will log the form entered by user in add modal.
+              // this.itemService.getItems();//This will log the form entered by user in add modal.
 
             }
 

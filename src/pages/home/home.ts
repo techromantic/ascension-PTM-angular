@@ -71,7 +71,8 @@ export class HomePage {
     // });
 
     this.utcTime();
-    this.init();
+    this.selectedSchedule = this.entity.schedule[0];
+    // this.init();
 
     // this.getLocation();
 
@@ -179,20 +180,20 @@ export class HomePage {
   //   this.selectedSchedule = this.entity.nextItem();
   // }
 
-
-
-
-  getNext() {
-
-
-    this.selectedSchedule = this.entity.schedule[0];
-
-    for(let i = 0; i < this.entity.schedule.length; i++){
-      this.schedules.push(this.entity.schedule[i]);
-
-    }
-
-  }
+  //
+  //
+  //
+  // getNext() {
+  //
+  //
+  //   this.selectedSchedule = this.entity.schedule[0];
+  //
+  //   for(let i = 0; i < this.entity.schedule.length; i++){
+  //     this.schedules.push(this.entity.schedule[i]);
+  //
+  //   }
+  //
+  // }
 
   // getSchedules(){
   //   console.log(this.entity.schedule);
@@ -220,6 +221,7 @@ export class HomePage {
 
   }
 
+
   sortItems() {
 
     this.entity.sortSchedule();
@@ -233,13 +235,14 @@ export class HomePage {
     }, 2000);
   }
 
-  init(): void{
-    setInterval(()=> {
-
-      this.getNext();
-    },1000);
-
-  }
+  //
+  // init(): void{
+  //   setInterval(()=> {
+  //
+  //     this.getNext();
+  //   },1000);
+  //
+  // }
 
 
 }

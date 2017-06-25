@@ -29,47 +29,47 @@ constructor(platform: Platform, statusBar: StatusBar,
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      this.openDB("AscensionDB");
+      // this.openDB("AscensionDB");
     });
   }
-
-  openDB(dbName: string) {
-
-    // Opens the database.
-    this.indexedDB.openDBAsync(dbName, 1).forEach(
-
-      // Next.
-      (readyState: string) => {
-
-        console.log('IndexedDB service: opening db: ' + readyState);
-
-      }, null
-
-    ).then(
-
-      () => {
-
-        // Gets all records from "TodoStore".
-        this.indexedDB.getAllRecordsAsync("ItemStore").forEach(
-
-          // Next.
-          (record: Item) => {
-
-            // Adds next record to the Todos entity.
-            if (record != null) {
-
-              this.entity.addItem(record);
-
-            }
-
-          }, null
-
-        ).then(() => console.log('IndexedDB service: obtaining of all records completed.'))
-      }
-
-    );
-
-  }
+  //
+  // openDB(dbName: string) {
+  //
+  //   // Opens the database.
+  //   this.indexedDB.openDBAsync(dbName, 1).forEach(
+  //
+  //     // Next.
+  //     (readyState: string) => {
+  //
+  //       console.log('IndexedDB service: opening db: ' + readyState);
+  //
+  //     }, null
+  //
+  //   ).then(
+  //
+  //     () => {
+  //
+  //       // Gets all records from "TodoStore".
+  //       this.indexedDB.getAllRecordsAsync("ItemStore").forEach(
+  //
+  //         // Next.
+  //         (record: Item) => {
+  //
+  //           // Adds next record to the Todos entity.
+  //           if (record != null) {
+  //
+  //             this.entity.addItem(record);
+  //
+  //           }
+  //
+  //         }, null
+  //
+  //       ).then(() => console.log('IndexedDB service: obtaining of all records completed.'))
+  //     }
+  //
+  //   );
+  //
+  // }
 
 }
 
