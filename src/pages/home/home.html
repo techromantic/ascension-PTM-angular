@@ -11,7 +11,7 @@
       <div *ngIf="!selectedSchedule" class="dashboard_pane">
         <ion-col col-9>
 
-          <div class="clock_unselected"> {{ myDate | amDateFormat: 'h:mm'}}
+          <div class="clock_unselected"> {{ myDate | amDateFormat: 'h:mm A'}}
           <span *ngIf="city"> {{ city }}</span>
           </div>
 
@@ -29,7 +29,21 @@
       <div *ngIf="selectedSchedule" class="dashboard_pane" [ngClass]="{'business': selectedSchedule.type == 'Business', 'personal': selectedSchedule.type == 'Personal', 'education': selectedSchedule.type == 'Education', 'health': selectedSchedule.type == 'Health', 'social': selectedSchedule.type == 'Social', 'logistics': selectedSchedule.type == 'Logistics'}">
         <ion-col col-9>
 
-          <div class="clock"> {{ myDate | amDateFormat: 'h:mm'}}</div>
+          <ion-row class="setting">
+
+            <ion-col col-6>
+              <div class="clock"> {{ myDate | amDateFormat: 'h:mm A'}}</div>
+            </ion-col>
+
+            <ion-col col-6 class="location">
+              <div> {{ city }}</div>
+              <!--<div *ngIf="weather"></div>-->
+              <!--<i class="wi wi-day-sunny"></i>-->
+              <img [src]='w_icon'>
+
+            </ion-col>
+          </ion-row>
+
 
 
           <div  *ngIf="selectedSchedule" class="title"> {{selectedSchedule.name}}</div>

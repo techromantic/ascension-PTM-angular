@@ -23,13 +23,13 @@ import { IonicStorageModule } from '@ionic/storage'
 import {MomentModule} from 'angular2-moment';
 import { Elastic } from '../directives/elastic/elastic';
 import { ItemPipe } from '../pipes/item/item';
-import { UtilsModule } from './utils/utils.module';
 import { HttpModule } from '@angular/http';
 import {AngularIndexedDB} from 'angular2-indexeddb';
-import {COSMAngularIndexedDBService} from './utils/cosm-angularindexdb.service'
 import {AscensionIndexedDBService} from './ascension-indexdb.service';
 import { Entity, Item } from './models/item';
 import { Geolocation } from '@ionic-native/geolocation';
+import { default as Ng2WeatherIconsModule } from 'ng2-weather-icons';
+
 
 @Injectable() export class IndexedDB {
 
@@ -103,12 +103,12 @@ export function initIndexedDB(indexedDB: IndexedDB): Function {
   ],
   imports: [
     HttpModule,
-    UtilsModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(MyApp),
     FormsModule,
     MomentModule,
+    Ng2WeatherIconsModule,
     LocalStorageModule.withConfig({
       prefix: 'my-app',
       storageType: 'localStorage'

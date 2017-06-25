@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ItemService {
 
-  constructor(public timeService: TimeService, private asc: Storage, private cosmUtil: COSMAppUtilsService, public entity: Entity) {
+  constructor(public timeService: TimeService, private asc: Storage, public entity: Entity) {
 
 
   }

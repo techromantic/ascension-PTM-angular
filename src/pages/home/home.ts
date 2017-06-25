@@ -8,7 +8,7 @@ import { ItemService } from '../../app/item.service';
 import { TimeService } from '../../app/time.service';
 import  moment  from 'moment';
 import { Observer } from 'rxjs/Observer';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 // Services.
 import {AscensionIndexedDBService } from '../../app/ascension-indexdb.service';
 // Models.
@@ -37,7 +37,9 @@ export class HomePage {
   location: any;
   city: any;
   state: any;
-
+  zip: any;
+  weather: any;
+  w_icon: any;
 
   constructor(public navCtrl: NavController,
               private itemService: ItemService,
@@ -58,6 +60,14 @@ export class HomePage {
 
   }
 
+  getSchedules(){
+    console.log(this.entity.schedule);
+    this.entity.schedule.forEach((element)=>{
+      console.log(element);
+    });
+  }
+
+
   ngOnInit(){
     this.today = moment().format('dddd');
     let time = moment().format('HHmmss');
@@ -74,60 +84,92 @@ export class HomePage {
     this.selectedSchedule = this.entity.schedule[0];
     // this.init();
 
-    // this.getLocation();
+    this.getLocation();
+    this.getSchedules();
 
   }
 
-  //
-  //
-  // getLocation(){
-  //
-  //   this.geolocation.getCurrentPosition().then((position) => {
-  //
-  //
-  //     this.location = position;
-  //     console.log(this.location['coords']['latitude']);
-  //
-  //     this.requestCity(this.location['coords']['latitude'], this.location['coords']['longitude'])
-  //       .subscribe(
-  //         res => {
-  //           console.log(res['results'][0]);
-  //           this.city = res['results'][0]['address_components'][3]['long_name']; }, //Bind to view
-  //         err => {
-  //           // Log errors if any
-  //           console.log(err);
-  //         });
-  //
-  //     // this.requestCity(this.location['coords']['latitude'], this.location['coords']['longitude'])
-  //     // this.getCity();
-  //     // let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-  //     //
-  //     // let mapOptions = {
-  //     //   center: latLng,
-  //     //   zoom: 15,
-  //     //   mapTypeId: google.maps.MapTypeId.ROADMAP
-  //     // }
-  //     //
-  //     // this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-  //
-  //   }, (err) => {
-  //     console.log(err);
-  //   });
-  //
-  // }
-  //
-  // requestCity(lat, lng): any{
-  //   let key = '&key=AIzaSyDLRcYgCs13_6MzL8EZ3oS5Mr8duwr5yA0';
-  //   let lati = lat;
-  //   let long = lng;
-  //   let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lati + ',' + long + key;
-  //   return this.http.get(url)
-  //   // ...and calling .json() on the response to return data
-  //     .map((res:Response) => res.json())
-  //     //...errors if any
-  //     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-  //
-  // }
+
+
+
+
+  getLocation(){
+
+    this.geolocation.getCurrentPosition().then((position) => {
+
+
+
+      this.location = position;
+      console.log(this.location['coords']['latitude']);
+
+      this.requestCity(this.location['coords']['latitude'], this.location['coords']['longitude'])
+        .subscribe(
+          res => {
+            console.log(res['results'][0]);
+            console.log(res['results'][0]['address_components'][6]['long_name']);
+            this.zip = res['results'][0]['address_components'][6]['long_name'];
+            this.city = res['results'][0]['address_components'][2]['long_name'];
+
+
+            this.requestWeather(this.zip)
+              .subscribe(
+                res => {
+                  console.log(res['weather'][0]['description']);
+                  this.weather =  (res['weather'][0]['description']);
+                  this.w_icon = 'http://openweathermap.org/img/w/' + (res['weather'][0]['icon']) + '.png';
+                  console.log(this.w_icon);
+                }, //Bind to view
+                err => {
+                  // Log errors if any
+                  console.log(err);
+                });
+
+
+
+
+
+          }, //Bind to view
+          err => {
+            // Log errors if any
+            console.log(err);
+          });
+
+
+
+
+
+    }, (err) => {
+      console.log(err);
+    });
+
+
+  }
+
+
+  requestCity(lat, lng): any{
+    let key = '&key=AIzaSyDLRcYgCs13_6MzL8EZ3oS5Mr8duwr5yA0';
+    let lati = lat;
+    let long = lng;
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lati + ',' + long + key;
+    return this.http.get(url)
+    // ...and calling .json() on the response to return data
+      .map((res:Response) => res.json())
+      //...errors if any
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+
+  requestWeather(zip): any{
+console.log(zip);
+    let key = '&APPID=d235f03b154a180a1855a97d26bbe885';
+    let url = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zip + '&APPID=d235f03b154a180a1855a97d26bbe885';
+
+    return this.http.get(url)
+    // ...and calling .json() on the response to return data
+      .map((res:Response) => res.json())
+      //...errors if any
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
 //   getCity(lat, lng) {
 //
@@ -195,12 +237,6 @@ export class HomePage {
   //
   // }
 
-  // getSchedules(){
-  //   console.log(this.entity.schedule);
-  //   for(let key in this.entity.schedule){
-  //     this.schedules.push(key);
-  //   }
-  // }
 
 
 

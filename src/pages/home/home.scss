@@ -17,22 +17,35 @@ ion-icon{
 
 .clock{
   width: 100%;
-  text-align: center;
-  font-size: 15vh;
+  text-align: left;
+  font-size: 9vmin;
+  margin-left: 25px;
+
+}
+
+.setting{
   border-bottom: solid white thin
 }
 
+.location{
+  width: 100%;
+  text-align: right;
+  font-size: 5vw;
+  padding-right: 25px;
+
+}
 .clock_unselected{
   width: 100%;
-  text-align: center;
+  text-align: left;
   font-size: 15vh;
+  margin-left: 10px;
   border-bottom: solid black thin
 }
 
 .title{
   width: 100%;
   text-align: center;
-  font-size: 8vh;
+  font-size: 8vmin;
   padding-top: .2em;
 }
 
