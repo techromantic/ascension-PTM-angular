@@ -134,10 +134,10 @@ export class Item {
       let dig2 = record2.time.slice(0,2);
       let time2 = moment().hour(parseInt(record2.time.slice(0, 2))).minute(parseInt(record2.time.slice(3, record2.time.length))).format();
       if (moment(time1).isBefore(time2)) {
-        return 1;
+        return -1;
       }
       if (moment(time1).isAfter(time2)) {
-        return -1;
+        return 1;
       }
 
     });

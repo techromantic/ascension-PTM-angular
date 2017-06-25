@@ -40,6 +40,8 @@ export class HomePage {
   zip: any;
   weather: any;
   w_icon: any;
+  dailies: any =[];
+  tasks: any = [];
 
   constructor(public navCtrl: NavController,
               private itemService: ItemService,
@@ -60,11 +62,47 @@ export class HomePage {
 
   }
 
-  getSchedules(){
+  getSchedulesToday(){
     console.log(this.entity.schedule);
-    this.entity.schedule.forEach((element)=>{
-      console.log(element);
+    this.entity.schedule.forEach((element, index)=>{
+
+      if(element['days'][this.today] == true){
+
+
+        this.dailies.push(element);
+
+
+
+
+
+
+      }
+
+
+
     });
+  }
+
+  getSchedulesFromNow(){
+
+    this.dailies.forEach((element, index)=>{
+
+
+      if(index < this.dailies.length - 1){
+        console.log(moment(this.dailies[index + 1]['moment']).isAfter(moment()));
+        if(moment(this.dailies[index + 1]['moment']).isAfter(moment())){
+          this.tasks.push(element);
+        }
+
+      }
+      else{
+        this.tasks.push(element);
+      }
+
+
+    })
+
+    console.log(this.tasks);
   }
 
 
@@ -83,9 +121,10 @@ export class HomePage {
     this.utcTime();
     this.selectedSchedule = this.entity.schedule[0];
     // this.init();
-
+    this.sortItems();
     this.getLocation();
-    this.getSchedules();
+    this.getSchedulesToday();
+    this.getSchedulesFromNow();
 
   }
 
