@@ -62,17 +62,17 @@
     </ion-col>
   </ion-row>
 
-  <ion-row style="margin-left: 0px;" *ngFor="let item of ITEMS | async ">
+  <ion-row style="margin-left: 0px;" *ngFor="let task of tasks ">
 
-      <ion-row (click)="onSelect(item)" *ngIf="item.days[this.today] == true"   [ngClass]="{'business': item.type == 'Business', 'personal': item.type == 'Personal', 'education': item.type == 'Education', 'health': item.type == 'Health', 'social': item.type == 'Social', 'logistics': item.type == 'Logistics'}" class="schitem" >
+      <ion-row (click)="onSelect(task)" *ngIf="task.days[this.today] == true"   [ngClass]="{'business': task.type == 'Business', 'personal': task.type == 'Personal', 'education': task.type == 'Education', 'health': task.type == 'Health', 'social': task.type == 'Social', 'logistics': task.type == 'Logistics'}" class="schitem" >
         <ion-col col-4 col-sm-3 col-lg-2 col-xl-2 style="padding: 0px;">
-          <div class="schitem_time">  {{item.displayTime}} {{item.meridian}}</div>
+          <div class="schitem_time">  {{task.displayTime}} {{task.meridian}}</div>
 
         </ion-col>
 
         <ion-col col-8 col-sm-9 col-lg-10 col-xl-10 style="padding: 0px;">
           <div class="schitem_name">
-            {{ item.name}} {{ item.type }}
+            {{ task.name}} {{ task.type }}
           </div>
         </ion-col>
 

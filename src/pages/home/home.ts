@@ -86,7 +86,7 @@ export class HomePage {
   getSchedulesFromNow(){
 
     this.dailies.forEach((element, index)=>{
-
+   
 
       if(index < this.dailies.length - 1){
         console.log(moment(this.dailies[index + 1]['moment']).isAfter(moment()));
@@ -103,6 +103,29 @@ export class HomePage {
     })
 
     console.log(this.tasks);
+
+    setInterval(() => {
+      this.dailies.forEach((element, index)=>{
+        this.tasks = [];
+
+        if(index < this.dailies.length - 1){
+          console.log(moment(this.dailies[index + 1]['moment']).isAfter(moment()));
+          if(moment(this.dailies[index + 1]['moment']).isAfter(moment())){
+            this.tasks.push(element);
+          }
+
+        }
+        else{
+          this.tasks.push(element);
+        }
+
+
+      })
+
+      console.log(this.tasks);
+    }, 60000);
+
+
   }
 
 
@@ -119,13 +142,13 @@ export class HomePage {
     // });
 
     this.utcTime();
-    this.selectedSchedule = this.entity.schedule[0];
+
     // this.init();
     this.sortItems();
     this.getLocation();
     this.getSchedulesToday();
     this.getSchedulesFromNow();
-
+    this.selectedSchedule = this.tasks[0];
   }
 
 
