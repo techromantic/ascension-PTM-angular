@@ -57,9 +57,38 @@ export class HomePage {
 
   }
 
-  ionSelected(){
-    this.sortItems();
 
+  ngOnInit(){
+    this.today = moment().format('dddd');
+    let time = moment().format('HHmmss');
+    // console.log('today is: ', day + ' and time: ', time);
+    // this.schedules = [];
+    // this.schedules = this.itemService.getDailyItems();
+    // console.log(this.schedules);
+
+    // this.schedules.forEach((element) => {
+    //   console.log(element);
+    // });
+
+    this.utcTime();
+
+    // this.init();
+    this.sortItems();
+    this.getLocation();
+    this.getSchedulesToday();
+    this.getSchedulesFromNow();
+    this.selectedSchedule = this.tasks[0];
+  }
+
+
+
+  ionSelected(){
+    // this.index.load();
+    this.sortItems();
+    this.getLocation();
+    this.getSchedulesToday();
+    this.getSchedulesFromNow();
+    this.selectedSchedule = this.tasks[0];
   }
 
   getSchedulesToday(){
@@ -86,10 +115,11 @@ export class HomePage {
   getSchedulesFromNow(){
 
     this.dailies.forEach((element, index)=>{
-   
+
 
       if(index < this.dailies.length - 1){
         console.log(moment(this.dailies[index + 1]['moment']).isAfter(moment()));
+        console.log(moment());
         if(moment(this.dailies[index + 1]['moment']).isAfter(moment())){
           this.tasks.push(element);
         }
@@ -129,28 +159,6 @@ export class HomePage {
   }
 
 
-  ngOnInit(){
-    this.today = moment().format('dddd');
-    let time = moment().format('HHmmss');
-    // console.log('today is: ', day + ' and time: ', time);
-    // this.schedules = [];
-    // this.schedules = this.itemService.getDailyItems();
-    // console.log(this.schedules);
-
-    // this.schedules.forEach((element) => {
-    //   console.log(element);
-    // });
-
-    this.utcTime();
-
-    // this.init();
-    this.sortItems();
-    this.getLocation();
-    this.getSchedulesToday();
-    this.getSchedulesFromNow();
-    this.selectedSchedule = this.tasks[0];
-  }
-
 
 
 
@@ -169,7 +177,7 @@ export class HomePage {
           res => {
             console.log(res['results'][0]);
             console.log(res['results'][0]['address_components'][6]['long_name']);
-            this.zip = res['results'][0]['address_components'][6]['long_name'];
+            this.zip = res['results'][0]['address_components'][8]['long_name'];
             this.city = res['results'][0]['address_components'][2]['long_name'];
 
 

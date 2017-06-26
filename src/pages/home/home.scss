@@ -27,6 +27,10 @@ ion-icon{
   border-bottom: solid white thin
 }
 
+.unselected_setting{
+  border-bottom: solid black thin;
+}
+
 .location{
   width: 100%;
   text-align: right;
@@ -37,9 +41,9 @@ ion-icon{
 .clock_unselected{
   width: 100%;
   text-align: left;
-  font-size: 15vh;
-  margin-left: 10px;
-  border-bottom: solid black thin
+  font-size: 9vmin;
+  margin-left: 25px;
+
 }
 
 .title{
@@ -119,5 +123,11 @@ ion-icon{
 .schitem_name{
   text-align: left;
   padding-left: 20px;
+  line-height: 3em;
+}
+
+.item_icon{
+  text-align: center;
+
   line-height: 3em;
 }

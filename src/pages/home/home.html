@@ -11,11 +11,24 @@
       <div *ngIf="!selectedSchedule" class="dashboard_pane">
         <ion-col col-9>
 
-          <div class="clock_unselected"> {{ myDate | amDateFormat: 'h:mm A'}}
-          <span *ngIf="city"> {{ city }}</span>
-          </div>
 
+          <ion-row class="unselected_setting">
+
+            <ion-col col-6>
+              <div class="clock"> {{ myDate | amDateFormat: 'h:mm A'}}</div>
+            </ion-col>
+
+            <ion-col col-6 class="location">
+              <div> {{ city }}</div>
+              <!--<div *ngIf="weather"></div>-->
+              <!--<i class="wi wi-day-sunny"></i>-->
+              <span style="font-size: 3vw" >{{ weather }} <img [src]='w_icon'></span>
+
+            </ion-col>
+          </ion-row>
           <div class="title">Loading...</div>
+
+
           <!--<div  *ngIf="selectedSchedule" class="title"> {{selectedSchedule.name}}</div>-->
         </ion-col>
         <ion-col col-3>
@@ -39,7 +52,7 @@
               <div> {{ city }}</div>
               <!--<div *ngIf="weather"></div>-->
               <!--<i class="wi wi-day-sunny"></i>-->
-              <img [src]='w_icon'>
+              <span style="font-size: 3vw" >{{ weather }} <img [src]='w_icon'></span>
 
             </ion-col>
           </ion-row>
@@ -70,10 +83,27 @@
 
         </ion-col>
 
-        <ion-col col-8 col-sm-9 col-lg-10 col-xl-10 style="padding: 0px;">
+        <ion-col col-7 col-sm-8 col-lg-9 col-xl-9 style="padding: 0px;">
           <div class="schitem_name">
             {{ task.name}} {{ task.type }}
           </div>
+
+
+        </ion-col>
+
+        <ion-col col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1>
+
+          <div class="item_icon">
+
+
+          <span *ngIf="task.type == 'Business'"> <ion-icon name="briefcase"></ion-icon></span>
+          <span *ngIf="task.type == 'Education'"> <ion-icon name="book"></ion-icon></span>
+          <span  *ngIf="task.type == 'Logistics'"> <ion-icon name="compass"></ion-icon></span>
+          <span  *ngIf="task.type == 'Social'"> <ion-icon name="contacts"></ion-icon></span>
+          <span  *ngIf="task.type == 'Health'"> <ion-icon name="heart"></ion-icon></span>
+          <span  *ngIf="task.type == 'Personal'"> <ion-icon name="person"></ion-icon></span>
+          </div>
+
         </ion-col>
 
       </ion-row>
