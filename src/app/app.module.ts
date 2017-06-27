@@ -29,6 +29,7 @@ import {AscensionIndexedDBService} from './ascension-indexdb.service';
 import { Entity, Item } from './models/item';
 import { Geolocation } from '@ionic-native/geolocation';
 import { default as Ng2WeatherIconsModule } from 'ng2-weather-icons';
+import { ExpandingDashboardComponent } from '../components/expanding-dashboard/expanding-dashboard';
 
 
 @Injectable() export class IndexedDB {
@@ -99,7 +100,8 @@ export function initIndexedDB(indexedDB: IndexedDB): Function {
     ScheduleDetailComponent,
     CreateItemModalPage,
     Elastic,
-    ItemPipe
+    ItemPipe,
+    ExpandingDashboardComponent
   ],
   imports: [
     HttpModule,
